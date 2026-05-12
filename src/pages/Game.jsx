@@ -43,7 +43,7 @@ export default function Game({ session, profile }) {
   }
 
   const btnStyle = (color) => ({
-    background: `linear-gradient(135deg, ${color}, ${color}bb)`,
+    background: 'linear-gradient(135deg,' + color + ',' + color + 'bb)',
     color: '#000',
     border: 'none',
     borderRadius: 14,
@@ -67,17 +67,26 @@ export default function Game({ session, profile }) {
             ))}
           </div>
           <div style={{ fontFamily: 'DM Mono,monospace', fontSize: 12, color: '#444' }}>
-            {profile?.display_name} · <span style={{ color: grade(score).c }}>{score} pct</span>
+            {profile?.display_name} <span style={{ color: grade(score).c }}>{score} pct</span>
           </div>
         </div>
 
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,.04)', border: '1px solid rgba(255,255,255,.08)', borderRadius: 20, padding: '5px 14px', marginBottom: 14 }}>
           <span>{sc.moduleIcon}</span>
-          <span style={{ ...S.tag, color: '#888' }}>{sc.module} · {sIdx + 1}/{SCENARIOS.length}</span>
+          <span style={{ ...S.tag, color: '#888' }}>{sc.module} {sIdx + 1}/{SCENARIOS.length}</span>
         </div>
 
+        {sc.principle && (
+          <div style={{ background: 'rgba(0,198,255,0.08)', border: '1px solid rgba(0,198,255,0.2)', borderRadius: 14, padding: '12px 16px', marginBottom: 12 }}>
+            <div style={{ fontSize: 10, color: '#00C6FF', fontFamily: 'DM Mono,monospace', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 6 }}>
+              Stiai ca?
+            </div>
+            <p style={{ color: '#ccc', fontSize: 14, lineHeight: 1.6, margin: 0 }}>{sc.principle}</p>
+          </div>
+        )}
+
         <div style={{ ...S.card, marginBottom: 16, opacity: anim ? 1 : 0, transition: 'opacity .2s' }}>
-          <div style={{ ...S.tag, marginBottom: 8 }}>👤 {sc.character}</div>
+          <div style={{ ...S.tag, marginBottom: 8 }}>{'👤 ' + sc.character}</div>
           <p style={{ fontSize: 16, lineHeight: 1.7, margin: 0, color: '#e0e0e0' }}>{sc.situation}</p>
         </div>
 
@@ -88,7 +97,7 @@ export default function Game({ session, profile }) {
                 <span style={{ fontSize: 26 }}>{ch.emoji}</span>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 11, color: ch.color, letterSpacing: 2, textTransform: 'uppercase', fontFamily: 'DM Mono,monospace' }}>
-                    Ai ales · {ch.tag}
+                    {'Ai ales: ' + ch.tag}
                   </div>
                   <div style={{ fontSize: 13, color: '#bbb', marginTop: 2 }}>{ch.text}</div>
                 </div>
@@ -100,7 +109,7 @@ export default function Game({ session, profile }) {
             </div>
 
             <div style={{ ...S.card, marginBottom: 14, padding: '18px 12px 14px' }}>
-              <div style={{ ...S.tag, marginBottom: 12, paddingLeft: 4 }}>Proiecție financiară — 8 luni</div>
+              <div style={{ ...S.tag, marginBottom: 12, paddingLeft: 4 }}>Proiectie financiara — 8 luni</div>
               <ResponsiveContainer width="100%" height={120}>
                 <LineChart data={ch.projection.map((v, i) => ({ m: 'L' + (i + 1), v }))}>
                   <XAxis dataKey="m" tick={{ fill: '#444', fontSize: 10, fontFamily: 'DM Mono' }} axisLine={false} tickLine={false} />
@@ -113,7 +122,7 @@ export default function Game({ session, profile }) {
             </div>
 
             <button onClick={next} style={btnStyle(ch.color)}>
-              {sIdx < SCENARIOS.length - 1 ? 'Scenariul ' + (sIdx + 2) + '/' + SCENARIOS.length + ' \u2192' : 'Analiz\u0103 AI final\u0103 \u2192'}
+              {sIdx < SCENARIOS.length - 1 ? 'Scenariul ' + (sIdx + 2) + '/' + SCENARIOS.length + ' →' : 'Analiza AI finala →'}
             </button>
           </div>
         ) : (
@@ -121,16 +130,4 @@ export default function Game({ session, profile }) {
             <div style={{ ...S.tag, marginBottom: 4 }}>Ce faci?</div>
             {sc.choices.map((c, i) => (
               <button key={i} onClick={() => pick(i)}
-                style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,.04)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 16, padding: '14px 16px', color: '#ddd', fontSize: 14, textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit', lineHeight: 1.5, transition: 'all .15s', width: '100%' }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,.08)'; e.currentTarget.style.transform = 'translateX(3px)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,.04)'; e.currentTarget.style.transform = 'translateX(0)' }}>
-                <span style={{ fontSize: 22, flexShrink: 0 }}>{c.emoji}</span>
-                <span>{c.text}</span>
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
+                style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,.04)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 16, padding: '14px 16px',
