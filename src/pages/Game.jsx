@@ -131,3 +131,10 @@ export default function Game({ session, profile }) {
             {sc.choices.map((c, i) => (
               <button key={i} onClick={() => pick(i)}
                 style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,.04)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 16, padding: '14px 16px',
+                        ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
