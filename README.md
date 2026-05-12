@@ -4,7 +4,7 @@ Simulatorul de educație financiară pentru tineri — PWA deployabilă pe Verce
 ---
 
 ## 🚀 Pași pentru deploy
-
+  
 ### 1. Supabase — Baza de date
 
 1. Mergi la **https://supabase.com** și deschide proiectul tău
