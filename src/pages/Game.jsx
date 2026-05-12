@@ -1,10 +1,4 @@
-Excelent! Trebuie să actualizăm 2 fișiere:
-1. Game.jsx — adaugă rating-ul imediat după alegere (Opțiunea C)
-2. AIFeedback.jsx — adaugă rezumatul cu toate deciziile ratinguite (Opțiunea D)
-Începem cu Game.jsx. Mergi la:
-👉 https://github.com/MirelaHa/moneypower/edit/main/src/pages/Game.jsx
-Selectează tot Ctrl+A, șterge, lipește:
-jsximport { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts'
 import { saveGameResult } from '../lib/supabase'
