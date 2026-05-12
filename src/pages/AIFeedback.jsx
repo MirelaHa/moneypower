@@ -1,7 +1,4 @@
-Acum AIFeedback.jsx. Mergi la:
-👉 https://github.com/MirelaHa/moneypower/edit/main/src/pages/AIFeedback.jsx
-Selectează tot Ctrl+A, șterge, lipește:
-jsximport { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { S, GlowBg, Btn, NavBar, grade } from '../components/UI'
 
