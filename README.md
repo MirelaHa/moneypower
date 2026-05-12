@@ -14,7 +14,7 @@ Simulatorul de educație financiară pentru tineri — PWA deployabilă pe Verce
    - **Project URL** → `VITE_SUPABASE_URL`
    - **anon public** key → `VITE_SUPABASE_ANON_KEY`
 
-### 2. GitHub — Încarcă codul
+### 2. GitHub — Încarcă codul   
 
 1. Mergi la **https://github.com/new**
 2. Nume repository: `moneypower`
