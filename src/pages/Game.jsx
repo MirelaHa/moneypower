@@ -100,4 +100,32 @@ export default function Game({ session, profile }) {
             <div style={{ ...S.card, marginBottom: 14, padding: '18px 12px 14px' }}>
               <div style={{ ...S.tag, marginBottom: 12, paddingLeft: 4 }}>Proiectie financiara — 8 luni</div>
               <ResponsiveContainer width="100%" height={120}>
-                <LineChart data={ch.projection.map((v, i) =
+                <LineChart data={ch.projection.map((v, i) => ({ m: 'L' + (i + 1), v }))}>
+                  <XAxis dataKey="m" tick={{ fill: '#444', fontSize: 10, fontFamily: 'DM Mono' }} axisLine={false} tickLine={false} />
+                  <YAxis hide />
+                  <Tooltip content={<ChartTip />} />
+                  <ReferenceLine y={0} stroke="rgba(255,255,255,.08)" />
+                  <Line type="monotone" dataKey="v" stroke={ch.color} strokeWidth={2.5} dot={false} activeDot={{ r: 4, fill: ch.color }} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <button onClick={next} style={{ background: 'linear-gradient(135deg,' + ch.color + ',' + ch.color + 'bb)', color: '#000', border: 'none', borderRadius: 14, padding: '14px 20px', fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', width: '100%' }}>
+              {sIdx < SCENARIOS.length - 1 ? 'Scenariul ' + (sIdx + 2) + '/' + SCENARIOS.length + ' →' : 'Analiza AI finala →'}
+            </button>
+          </div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 9, opacity: anim ? 1 : 0, transition: 'opacity .2s' }}>
+            <div style={{ ...S.tag, marginBottom: 4 }}>Ce faci?</div>
+            {sc.choices.map((c, i) => (
+              <button key={i} onClick={() => pick(i)} onMouseEnter={hoverOn} onMouseLeave={hoverOff}
+                style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,.04)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 16, padding: '14px 16px', color: '#ddd', fontSize: 14, textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit', lineHeight: 1.5, transition: 'all .15s', width: '100%' }}>
+                <span style={{ fontSize: 22, flexShrink: 0 }}>{c.emoji}</span>
+                <span>{c.text}</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
