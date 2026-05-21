@@ -32,6 +32,16 @@ const Stars = ({ count }) => {
 
 export default function Game({ session, profile }) {
   const navigate = useNavigate()
+  const shuffle = (arr) => {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
+const [scenarios] = useState(() => shuffle(SCENARIOS))
   const [sIdx, setSIdx] = useState(0)
   const [choiceIdx, setChoiceIdx] = useState(null)
   const [showResult, setShowResult] = useState(false)
@@ -39,7 +49,7 @@ export default function Game({ session, profile }) {
   const [decisions, setDecisions] = useState([])
   const [anim, setAnim] = useState(true)
 
-  const sc = SCENARIOS[sIdx]
+  const sc = scenarios[sIdx]
   const ch = choiceIdx !== null ? sc.choices[choiceIdx] : null
   const rating = ch ? getRating(ch.score) : null
 
@@ -54,7 +64,7 @@ export default function Game({ session, profile }) {
   const next = async () => {
     setAnim(false)
     setTimeout(async () => {
-      if (sIdx < SCENARIOS.length - 1) {
+      if (sIdx < scenarios.length - 1) {
         setSIdx(s => s + 1)
         setChoiceIdx(null)
         setShowResult(false)
@@ -75,7 +85,7 @@ export default function Game({ session, profile }) {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <div style={{ display: 'flex', gap: 5 }}>
-            {SCENARIOS.map((_, i) => (
+            {scenarios.map((_, i) => (
               <div key={i} style={{ width: i === sIdx ? 24 : 7, height: 7, borderRadius: 4, background: i < sIdx ? '#00FF87' : i === sIdx ? '#00C6FF' : 'rgba(255,255,255,.1)', transition: 'all .3s' }} />
             ))}
           </div>
@@ -86,7 +96,7 @@ export default function Game({ session, profile }) {
 
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,.04)', border: '1px solid rgba(255,255,255,.08)', borderRadius: 20, padding: '5px 14px', marginBottom: 14 }}>
           <span>{sc.moduleIcon}</span>
-          <span style={{ ...S.tag, color: '#888' }}>{sc.module} {sIdx + 1}/{SCENARIOS.length}</span>
+          <span style={{ ...S.tag, color: '#888' }}>{sc.module} {sIdx + 1}/{scenarios.length}</span>
         </div>
 
         {sc.principle && (
@@ -159,7 +169,7 @@ export default function Game({ session, profile }) {
             </div>
 
             <button onClick={next} style={{ background: 'linear-gradient(135deg,' + ch.color + ',' + ch.color + 'bb)', color: '#000', border: 'none', borderRadius: 14, padding: '14px 20px', fontSize: 15, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit', width: '100%' }}>
-              {sIdx < SCENARIOS.length - 1 ? 'Scenariul ' + (sIdx + 2) + '/' + SCENARIOS.length + ' →' : 'Analiza AI finala →'}
+              {sIdx < scenarios.length - 1 ? 'Scenariul ' + (sIdx + 2) + '/' + scenarios.length + ' →' : 'Analiza AI finala →'}
             </button>
           </div>
         ) : (
